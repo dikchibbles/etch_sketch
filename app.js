@@ -3,7 +3,24 @@ let container = document.querySelector(".container");
 
 let changeBackgroundColor = (e) => {
   let selectedDiv = e.currentTarget;
-  selectedDiv.style.backgroundColor = `rgb(${randomNumberUpTo255()}, ${randomNumberUpTo255()}, ${randomNumberUpTo255()})`;
+  if (selectedDiv.classList.contains("filled")) {
+    let rgbValues = selectedDiv.style.backgroundColor;
+    let match = rgbValues.match(/^rgb?\((\d+),\s*(\d+),\s*(\d+)/);
+    let newRgbValues = [];
+    for (let rgbValue of match.slice(1)) {
+      rgbValue = +rgbValue;
+      if (rgbValue - 25 < 0) {
+        rgbValue = 0;
+      } else {
+        rgbValue -= 25;
+      }
+      newRgbValues.push(rgbValue);
+    }
+    selectedDiv.style.backgroundColor = `rgb(${newRgbValues[0]}, ${newRgbValues[1]}, ${newRgbValues[2]})`;
+  } else {
+    selectedDiv.style.backgroundColor = `rgb(${randomNumberUpTo255()}, ${randomNumberUpTo255()}, ${randomNumberUpTo255()})`;
+    selectedDiv.classList.add("filled");
+  }
 };
 
 let generateCustomGrid = (num) => {
