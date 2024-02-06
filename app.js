@@ -3,7 +3,7 @@ let container = document.querySelector(".container");
 
 let changeBackgroundColor = (e) => {
   let selectedDiv = e.currentTarget;
-  selectedDiv.style.backgroundColor = "black";
+  selectedDiv.style.backgroundColor = `rgb(${randomNumberUpTo255()}, ${randomNumberUpTo255()}, ${randomNumberUpTo255()})`;
 };
 
 let generateCustomGrid = (num) => {
@@ -19,6 +19,10 @@ let generateCustomGrid = (num) => {
     }
     main.appendChild(rowDiv);
   }
+};
+
+let randomNumberUpTo255 = () => {
+  return Math.floor(Math.random() * 256);
 };
 
 let clearGrid = () => {
